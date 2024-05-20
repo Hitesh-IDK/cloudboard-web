@@ -1,0 +1,21 @@
+.credentials__main {
+  width: 40rem;
+}
+
+.credentials__form {
+  display: flex;
+  flex-direction: column;
+}
+
+.credentials__label {
+  font-size: 1.3rem;
+  color: #070d0da4;
+  align-self: center;
+  margin-bottom: 10px;
+}
+
+.credentials__inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}

@@ -4,7 +4,7 @@ import styles from "./header.module.css";
 export default function Headers() {
   return (
     <header>
-      <h3 className={styles.header_title}>CloudBoard</h3>
+      <h2 className={styles.header_title}>CloudBoard</h2>
     </header>
   );
 }
