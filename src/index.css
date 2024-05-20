@@ -12,6 +12,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   font-family: Inter, sans-serif;
   color: #070d0d;
+  min-height: 100vh;
 }
 
 code {

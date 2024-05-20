@@ -1,20 +1,20 @@
-.credentials__main {
+.login__main {
   width: 40rem;
 }
 
-.credentials__form {
+.login__form {
   display: flex;
   flex-direction: column;
 }
 
-.credentials__label {
+.login__label {
   font-size: 1.3rem;
   color: #070d0da4;
   align-self: center;
   margin-bottom: 10px;
 }
 
-.credentials__inputs {
+.login__inputs {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;

@@ -16,10 +16,10 @@ export default function Login(): JSX.Element {
   const isAccessError = accessKey.length < 16 || accessKey.length > 128;
 
   return (
-    <div className={styles.credentials__main}>
-      <FormControl className={styles.credentials__form}>
-        <FormLabel className={styles.credentials__label}>Credentials</FormLabel>
-        <Stack className={styles.credentials__inputs}>
+    <div className={styles.login__main}>
+      <FormControl className={styles.login__form}>
+        <FormLabel className={styles.login__label}>Credentials</FormLabel>
+        <Stack className={styles.login__inputs}>
           <Input
             type="password"
             value={accessKey}
