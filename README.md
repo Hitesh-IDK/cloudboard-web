@@ -1,6 +1,14 @@
-# Getting Started with Create React App
+# CloudBoard
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project aims at improving your experience with cloud computing services. In this current market there exists various Cloud Service companies and many (mostly freelancers) would have resources in more than one service provider. <br>
+
+## Description
+
+This project will combine the statistics from various platforms like Azure, AWS and GCP to provide all the needed information in one place. Making it easy to keep track of the resources, the budgets associated with them as well as recommendations to optimize these resources. <br>
+For this we will need a UI and I will be using [React](https://react.dev) as my framework for this, as I am most experienced in this techonology while also it having the most support from the community and their third party packages.<br>
+With all the community package support out there, I had a lot of options to choose to assist me with the UI components but I decided to go with Chakra for this one, as it was something new to me and I have never worked with it but it looked pretty asthetic. <br>
+
+There were some challenges that I ran into before I even started the project execution, and that was during the planning. If I am integrating data from multiple sources than I ofcourse need to do it using the API's provided by these sources/services. But reading through such a profound API documentation just to implement a data analysis UI was definetly not easy for a beginner like me. I was lost in all kinds of api's that they were providing (which were totally not realted to what I wanted but I was just so lost), but then finally landed on the one api endpoint that would help with this. I initially only worked with a single service provider (AWS), and worked on implementing the solution before I dove deeper with all of the services.
 
 ## Available Scripts
 
@@ -10,37 +18,3 @@ In the project directory, you can run:
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
