@@ -1,5 +1,10 @@
 import React from "react";
+import Login from "../components/login/login";
 
-export default function () {
-  return <div></div>;
+export default function Credentials() {
+  return (
+    <div>
+      <Login />
+    </div>
+  );
 }
