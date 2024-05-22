@@ -1,4 +1,5 @@
 import {
+  Button,
   FormControl,
   FormErrorMessage,
   FormLabel,
@@ -8,16 +9,24 @@ import {
 import React, { useState } from "react";
 
 import styles from "./login.module.css";
+import StoreCreds from "../../helpers/auth/store_creds";
+import GetCostUsage from "../../helpers/aws/getCostUsage";
 
 export default function Login(): JSX.Element {
   const [secretKey, setSecretKey] = useState<string>("");
   const [accessKey, setAccessKey] = useState<string>("");
-  const isSecretError = secretKey.length < 16 || secretKey.length > 128;
-  const isAccessError = accessKey.length < 16 || accessKey.length > 128;
+  const [isAuthenticating, setIsAuthenticating] = useState<boolean>(false);
+  let isSecretError = secretKey.length < 16 || secretKey.length > 128;
+  let isAccessError = accessKey.length < 16 || accessKey.length > 128;
+
+  console.log(isAccessError);
 
   return (
     <div className={styles.login__main}>
-      <FormControl className={styles.login__form}>
+      <FormControl
+        className={styles.login__form}
+        isInvalid={isSecretError || isAccessError}
+      >
         <FormLabel className={styles.login__label}>Credentials</FormLabel>
         <Stack className={styles.login__inputs}>
           <Input
@@ -26,6 +35,7 @@ export default function Login(): JSX.Element {
             onChange={(e) => setAccessKey(e.target.value)}
             placeholder="Enter Access Key"
           ></Input>
+
           {isAccessError && (
             <FormErrorMessage>
               Access Key must be 16-128 characters
@@ -44,6 +54,28 @@ export default function Login(): JSX.Element {
             <FormErrorMessage>
               Secret Key must be 16-128 characters
             </FormErrorMessage>
+          )}
+
+          {isAuthenticating ? (
+            <Button loadingText="Authenticating" colorScheme="pink" isLoading>
+              Login
+            </Button>
+          ) : (
+            <Button
+              loadingText="Authenticating"
+              colorScheme="pink"
+              onClick={() => {
+                if (isSecretError || isAccessError) return;
+
+                setIsAuthenticating(true);
+                StoreCreds(secretKey, accessKey);
+                GetCostUsage().then(() => {
+                  setIsAuthenticating(false);
+                });
+              }}
+            >
+              Login
+            </Button>
           )}
         </Stack>
       </FormControl>
