@@ -12,3 +12,7 @@
   padding-bottom: 3rem;
   min-height: 100vh;
 }
+
+.overview__content {
+  padding: 1rem 2rem;
+}

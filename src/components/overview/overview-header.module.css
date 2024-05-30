@@ -1,6 +1,8 @@
 .overview__header {
   display: flex;
   padding: 1rem 2rem;
+
+  border-bottom: 2px solid rgba(170, 170, 170, 0.342);
 }
 
 .header__title {
