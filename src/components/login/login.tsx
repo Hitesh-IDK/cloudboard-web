@@ -16,6 +16,7 @@ export default function Login(): JSX.Element {
   const [secretKey, setSecretKey] = useState<string>("");
   const [accessKey, setAccessKey] = useState<string>("");
   const [isAuthenticating, setIsAuthenticating] = useState<boolean>(false);
+
   let isSecretError = secretKey.length < 16 || secretKey.length > 128;
   let isAccessError = accessKey.length < 16 || accessKey.length > 128;
 
@@ -62,7 +63,6 @@ export default function Login(): JSX.Element {
             </Button>
           ) : (
             <Button
-              loadingText="Authenticating"
               colorScheme="pink"
               onClick={() => {
                 if (isSecretError || isAccessError) return;
@@ -79,6 +79,7 @@ export default function Login(): JSX.Element {
           )}
         </Stack>
       </FormControl>
+      <h5></h5>
     </div>
   );
 }

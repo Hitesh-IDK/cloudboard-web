@@ -1,10 +1,10 @@
 import { GetCostAndUsageCommandOutput } from "@aws-sdk/client-cost-explorer";
-import { AwsServiceCost } from "./config";
+import { AwsServiceCost, AwsServiceData } from "./config";
 
 export default function ExtractCost(response: GetCostAndUsageCommandOutput) {
   const results = response.ResultsByTime;
 
-  const services: string[] = [];
+  const services: AwsServiceData[] = [];
   const serviceCost: AwsServiceCost[] = [];
 
   results?.forEach((result) => {
@@ -30,11 +30,31 @@ export default function ExtractCost(response: GetCostAndUsageCommandOutput) {
             end: result.TimePeriod.End,
           },
         });
-        if (services.includes(key)) return;
-        services.push(key);
+
+        let inserted = false;
+
+        services.forEach((service) => {
+          if (service.serviceName === key) {
+            inserted = true;
+            const tempServiceCost = service.cost ? service.cost : 0;
+            service.unit = group.Metrics?.UnblendedCost.Unit || "N/A";
+            service.cost = Number.isNaN(cost)
+              ? tempServiceCost
+                ? tempServiceCost
+                : 0
+              : tempServiceCost + cost;
+          }
+        });
+
+        if (!inserted) {
+          services.push({
+            unit: group.Metrics?.UnblendedCost.Unit || "N/A",
+            cost: cost,
+            serviceName: key,
+          });
+        }
       });
     });
   });
-
   console.log(services, serviceCost);
 }

@@ -27,14 +27,9 @@ export default async function GetCostUsage() {
       End: "2024-05-22", // required
     },
     Granularity: "DAILY", // required
-    Metrics: [
-      // MetricNames // required
-      "UnblendedCost",
-    ],
+    Metrics: ["UnblendedCost"],
     GroupBy: [
-      // GroupDefinitions
       {
-        // GroupDefinition
         Type: "DIMENSION",
         Key: "SERVICE",
       },

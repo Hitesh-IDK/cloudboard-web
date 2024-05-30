@@ -35,3 +35,10 @@ export interface AwsServiceUsage {
     end: string;
   };
 }
+
+export interface AwsServiceData {
+  unit: string;
+  cost?: number;
+  usage?: number;
+  serviceName: string;
+}
