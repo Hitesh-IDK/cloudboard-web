@@ -1,15 +1,15 @@
 import React from "react";
 import "./App.css";
-import Header from "./components/header";
 import Credentials from "./pages/credentials";
 import { ChakraProvider } from "@chakra-ui/react";
+import Headers from "./components/login/header";
+import Overview from "./pages/overview";
 
 function App() {
   return (
     <>
       <ChakraProvider>
-        <Header />
-        <Credentials />
+        <Overview />
       </ChakraProvider>
     </>
   );
