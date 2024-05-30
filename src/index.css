@@ -25,3 +25,18 @@ code {
   font-family: "Inter";
   src: url("./fonts/Inter.ttf");
 }
+
+@font-face {
+  font-family: "poppins";
+  src: url("./fonts//poppins/Poppins-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "poppins-medium";
+  src: url("./fonts//poppins/Poppins-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "poppins-semibold";
+  src: url("./fonts//poppins/Poppins-SemiBold.ttf") format("truetype");
+}

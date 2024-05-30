@@ -3,7 +3,8 @@
   width: 75%;
   background-color: white;
   border-radius: 10px;
-  border: 3px solid rgba(95, 28, 92, 0.288);
+  /* border: 3px solid rgba(95, 28, 92, 0.288); */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .overview__body {
