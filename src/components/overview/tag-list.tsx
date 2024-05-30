@@ -8,11 +8,12 @@ import {
 } from "@chakra-ui/react";
 import styles from "./tag-list.module.css";
 import { AddIcon } from "@chakra-ui/icons";
+import SectionTitle from "../common/section-title";
 
 export default function TagList(): JSX.Element {
   return (
     <div className={styles.list__container}>
-      <h3 className={styles.list__title}>Tags</h3>
+      <SectionTitle title="Tags" />
 
       <HStack spacing={3}>
         <Tag
