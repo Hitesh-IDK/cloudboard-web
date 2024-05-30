@@ -1,0 +1,32 @@
+.cost__container {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+}
+
+.cost__sub_container {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(128, 128, 128, 0.151);
+  border-radius: 8px;
+}
+
+.cost__date_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.input__date {
+  background-color: #eddee9;
+  border-radius: 8px;
+  padding: 5px 10px;
+  width: 80%;
+}
+
+.input__title {
+  margin-left: 5px;
+  font-family: poppins-medium;
+}
