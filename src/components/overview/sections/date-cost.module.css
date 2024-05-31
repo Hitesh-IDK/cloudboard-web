@@ -15,3 +15,10 @@
   margin-left: 5px;
   font-family: poppins-medium;
 }
+
+.cost__spinner {
+  justify-self: center;
+  align-self: center;
+
+  padding: 1rem;
+}

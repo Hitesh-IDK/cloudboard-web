@@ -3,7 +3,6 @@ import {
   Tag,
   TagCloseButton,
   TagLabel,
-  TagLeftIcon,
   TagRightIcon,
 } from "@chakra-ui/react";
 import styles from "./tag-list.module.css";

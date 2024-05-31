@@ -1,10 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./date-cost.module.css";
-import { Stat, StatHelpText, StatLabel, StatNumber } from "@chakra-ui/react";
+import {
+  Spinner,
+  Stat,
+  StatHelpText,
+  StatLabel,
+  StatNumber,
+} from "@chakra-ui/react";
+import { AwsServiceData } from "../../../helpers/aws/config";
 
-export default function DateCost() {
+export default function DateCost({
+  costData,
+}: {
+  costData: AwsServiceData[] | undefined;
+}) {
+  const [isMounted, setIsMounted] = useState<boolean>(false);
   const [fromDate, setFromDate] = useState<Date>(new Date());
   const [toDate, setToDate] = useState<Date>(new Date());
+  const [totalCost, setTotalCost] = useState<number>(0);
 
   const fromDateHandler = (fromDate: Date) => {
     setFromDate(fromDate);
@@ -18,6 +31,18 @@ export default function DateCost() {
   const toMonth = toDate.toDateString().split(" ")[1];
   const fromDateNum = fromDate.toDateString().split(" ")[2];
   const toDateNum = toDate.toDateString().split(" ")[2];
+
+  useEffect(() => {
+    setIsMounted(true);
+    if (!isMounted) return;
+    if (costData === undefined) return;
+
+    setTotalCost(
+      costData.reduce((acc, curr) => acc + (curr.cost ? curr.cost : 0), 0) *
+        Number(process.env.REACT_APP_USDTOINR)
+    );
+  }, [costData, isMounted]);
+
   return (
     <>
       <div className={styles.cost__date_container}>
@@ -43,15 +68,21 @@ export default function DateCost() {
       </div>
 
       <div className={styles.cost__date_container}>
-        <Stat>
-          <StatLabel>Total Cost</StatLabel>
-          <StatNumber>₹0.00</StatNumber>
-          <StatHelpText>
-            {fromMonth == toMonth && fromDateNum == toDateNum
-              ? "Today"
-              : `${fromMonth} ${fromDateNum} - ${toMonth} ${toDateNum}`}
-          </StatHelpText>
-        </Stat>
+        {costData ? (
+          <Stat>
+            <StatLabel>Total Cost</StatLabel>
+            <StatNumber>₹{totalCost.toFixed(2)}</StatNumber>
+            <StatHelpText>
+              {fromMonth === toMonth && fromDateNum === toDateNum
+                ? "Today"
+                : `${fromMonth} ${fromDateNum} - ${toMonth} ${toDateNum}`}
+            </StatHelpText>
+          </Stat>
+        ) : (
+          <div className={styles.cost__spinner}>
+            <Spinner size={"lg"} color="#29b5bc" />
+          </div>
+        )}
       </div>
     </>
   );

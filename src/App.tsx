@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
-import Credentials from "./pages/credentials";
 import { ChakraProvider } from "@chakra-ui/react";
 import Overview from "./pages/overview";
 

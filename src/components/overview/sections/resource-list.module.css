@@ -1,0 +1,27 @@
+.cost__resource_container {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem;
+
+  border-bottom: 2px solid #dbbdd3;
+}
+
+.cost__resource_title {
+  font-size: 1.1rem;
+  font-family: poppins;
+}
+
+.cost__resource_cost {
+  font-size: 1.05rem;
+  font-family: poppins-medium;
+  margin-right: 1rem;
+  color: #b87aa7;
+}
+
+.resource__loader {
+  align-self: center;
+
+  display: flex;
+  height: 100%;
+  align-items: center;
+}

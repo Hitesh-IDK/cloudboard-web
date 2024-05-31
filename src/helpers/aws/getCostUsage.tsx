@@ -3,14 +3,16 @@ import {
   GetCostAndUsageCommand,
   GetCostAndUsageCommandInput,
 } from "@aws-sdk/client-cost-explorer";
-import config, { AwsConfig, AwsServiceCost } from "./config";
+import config, { AwsConfig } from "./config";
 import ExtractCost from "./extractCost";
 
 export default async function GetCostUsage() {
-  const accessKey = localStorage.getItem("accessKey");
-  const secretKey = localStorage.getItem("secretKey");
+  const accessKey = process.env.REACT_APP_ACCESS_KEY;
+  const secretKey = process.env.REACT_APP_SECRET_KEY;
 
-  if (accessKey === null || secretKey === null) return;
+  console.log(accessKey);
+
+  if (accessKey === undefined || secretKey === undefined) return;
 
   const newConfig: AwsConfig = {
     ...config,
@@ -39,5 +41,5 @@ export default async function GetCostUsage() {
   const command = new GetCostAndUsageCommand(input);
 
   const response = await client.send(command);
-  ExtractCost(response);
+  return ExtractCost(response);
 }

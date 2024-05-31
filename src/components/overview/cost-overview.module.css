@@ -13,23 +13,3 @@
   border: 1px solid rgba(128, 128, 128, 0.151);
   border-radius: 8px;
 }
-
-.cost__resource_container {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.5rem;
-
-  border-bottom: 2px solid #dbbdd3;
-}
-
-.cost__resource_title {
-  font-size: 1.1rem;
-  font-family: poppins;
-}
-
-.cost__resource_cost {
-  font-size: 1.05rem;
-  font-family: poppins-medium;
-  margin-right: 1rem;
-  color: #b87aa7;
-}

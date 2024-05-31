@@ -56,5 +56,10 @@ export default function ExtractCost(response: GetCostAndUsageCommandOutput) {
       });
     });
   });
-  console.log(services, serviceCost);
+
+  services.sort((a, b) => {
+    return b.cost! - a.cost!;
+  });
+
+  return services;
 }
