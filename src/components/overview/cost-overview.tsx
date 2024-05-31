@@ -17,6 +17,11 @@ export default function CostOverview(): JSX.Element {
     setToDate(toDate);
   };
 
+  const fromMonth = fromDate.toDateString().split(" ")[1];
+  const toMonth = toDate.toDateString().split(" ")[1];
+  const fromDateNum = fromDate.toDateString().split(" ")[2];
+  const toDateNum = toDate.toDateString().split(" ")[2];
+
   return (
     <div>
       <SectionGap />
@@ -51,18 +56,27 @@ export default function CostOverview(): JSX.Element {
               <StatLabel>Total Cost</StatLabel>
               <StatNumber>₹0.00</StatNumber>
               <StatHelpText>
-                {fromDate.toDateString().split(" ")[1]}{" "}
-                {fromDate.toDateString().split(" ")[2]} -{" "}
-                {toDate.toDateString().split(" ")[1]}{" "}
-                {toDate.toDateString().split(" ")[2]}
+                {fromMonth == toMonth && fromDateNum == toDateNum
+                  ? "Today"
+                  : `${fromMonth} ${fromDateNum} - ${toMonth} ${toDateNum}`}
               </StatHelpText>
             </Stat>
           </div>
         </div>
 
         <div className={styles.cost__sub_container}>
-          <div>To</div>
-          <div>To</div>
+          <div className={styles.cost__resource_container}>
+            <div className={styles.cost__resource_title}>AWS EC2 Resouce</div>
+            <div className={styles.cost__resource_cost}>₹0.00</div>
+          </div>
+          <div className={styles.cost__resource_container}>
+            <div className={styles.cost__resource_title}>AWS EC2 Resouce</div>
+            <div className={styles.cost__resource_cost}>₹0.00</div>
+          </div>
+          <div className={styles.cost__resource_container}>
+            <div className={styles.cost__resource_title}>AWS EC2 Resouce</div>
+            <div className={styles.cost__resource_cost}>₹0.00</div>
+          </div>
         </div>
       </div>
     </div>
