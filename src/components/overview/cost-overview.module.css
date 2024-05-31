@@ -14,24 +14,6 @@
   border-radius: 8px;
 }
 
-.cost__date_container {
-  display: flex;
-  flex-direction: column;
-}
-
-.input__date {
-  background-color: rgb(255, 247, 253);
-  border: 1px solid #b87aa7;
-  border-radius: 8px;
-  padding: 5px 10px;
-  width: 80%;
-}
-
-.input__title {
-  margin-left: 5px;
-  font-family: poppins-medium;
-}
-
 .cost__resource_container {
   display: flex;
   justify-content: space-between;
