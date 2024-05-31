@@ -8,8 +8,19 @@ import {
 import styles from "./tag-list.module.css";
 import { AddIcon } from "@chakra-ui/icons";
 import SectionTitle from "../common/section-title";
+import { useEffect, useState } from "react";
+import GetTags from "../../helpers/aws/getTags";
 
 export default function TagList(): JSX.Element {
+  const [isMounted, setIsMounted] = useState<boolean>(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+    if (!isMounted) return;
+
+    GetTags();
+  }, [isMounted]);
+
   return (
     <div className={styles.list__container}>
       <SectionTitle title="Tags" />

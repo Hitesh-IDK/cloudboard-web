@@ -17,7 +17,7 @@ export default function ResourceList({
       if (!data.cost) return <></>;
 
       return (
-        <div className={styles.cost__resource_container}>
+        <div className={styles.cost__resource_container} key={data.serviceName}>
           <div className={styles.cost__resource_title}>{data.serviceName}</div>
           <div className={styles.cost__resource_cost}>
             ₹{(data.cost * Number(process.env.REACT_APP_USDTOINR)).toFixed(2)}

@@ -7,20 +7,13 @@ import config, { AwsConfig } from "./config";
 import ExtractCost from "./extractCost";
 
 export default async function GetCostUsage() {
-  const accessKey = process.env.REACT_APP_ACCESS_KEY;
-  const secretKey = process.env.REACT_APP_SECRET_KEY;
+  if (
+    config.credentials.accessKeyId === undefined ||
+    config.credentials.secretAccessKey === undefined
+  )
+    return;
 
-  console.log(accessKey);
-
-  if (accessKey === undefined || secretKey === undefined) return;
-
-  const newConfig: AwsConfig = {
-    ...config,
-    credentials: { accessKeyId: accessKey, secretAccessKey: secretKey },
-  };
-
-  const client = new CostExplorerClient(newConfig);
-  console.log("Hey");
+  const client = new CostExplorerClient(config);
 
   const input: GetCostAndUsageCommandInput = {
     TimePeriod: {
