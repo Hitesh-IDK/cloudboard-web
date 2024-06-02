@@ -11,11 +11,15 @@ export default function CostOverview(): JSX.Element {
   const [isMounted, setIsMounted] = useState<boolean>(false);
   const [costData, setCostData] = useState<AwsServiceData[]>();
 
+  const [refreshClicked, setRefreshClicked] = useState<boolean>(false);
+  const [fromDate, setFromDate] = useState<Date>(new Date());
+  const [toDate, setToDate] = useState<Date>(new Date());
+
   useEffect(() => {
     setIsMounted(true);
     if (!isMounted) return;
 
-    GetCostUsage().then((data) => setCostData(data));
+    GetCostUsage(fromDate, toDate).then((data) => setCostData(data));
   }, [isMounted]);
 
   return (
@@ -25,7 +29,12 @@ export default function CostOverview(): JSX.Element {
 
       <div className={styles.cost__container}>
         <div className={styles.cost__sub_container}>
-          <DateCost costData={costData} />
+          <DateCost
+            costData={costData}
+            refreshStates={{ refreshClicked, setRefreshClicked }}
+            fromDateStates={{ fromDate, setFromDate }}
+            toDateStates={{ toDate, setToDate }}
+          />
         </div>
         <div className={styles.cost__sub_container}>
           <ResourceList costData={costData} />

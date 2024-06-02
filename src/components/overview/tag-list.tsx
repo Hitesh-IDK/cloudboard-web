@@ -13,12 +13,32 @@ import GetTags from "../../helpers/aws/getTags";
 
 export default function TagList(): JSX.Element {
   const [isMounted, setIsMounted] = useState<boolean>(false);
+  const [tagElements, setTagElements] = useState<JSX.Element[]>([]);
 
   useEffect(() => {
     setIsMounted(true);
     if (!isMounted) return;
 
-    GetTags();
+    GetTags().then((data) => {
+      const elements: JSX.Element[] = data.map((tag) => (
+        <Tag
+          size={"lg"}
+          variant="solid"
+          borderRadius={"full"}
+          style={{ cursor: "pointer" }}
+          key={tag}
+        >
+          <TagLabel>{tag}</TagLabel>
+          <TagRightIcon
+            boxSize="12px"
+            as={AddIcon}
+            style={{ cursor: "pointer" }}
+          />
+        </Tag>
+      ));
+
+      setTagElements(elements);
+    });
   }, [isMounted]);
 
   return (
@@ -26,7 +46,9 @@ export default function TagList(): JSX.Element {
       <SectionTitle title="Tags" />
 
       <HStack spacing={3}>
-        <Tag
+        {tagElements}
+
+        {/* <Tag
           size="lg"
           variant="solid"
           backgroundColor={"#47c7ce"}
@@ -49,7 +71,7 @@ export default function TagList(): JSX.Element {
             as={AddIcon}
             style={{ cursor: "pointer" }}
           />
-        </Tag>
+        </Tag> */}
       </HStack>
     </div>
   );

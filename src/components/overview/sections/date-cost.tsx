@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import styles from "./date-cost.module.css";
 import {
+  Button,
   Spinner,
   Stat,
   StatHelpText,
@@ -9,15 +10,37 @@ import {
 } from "@chakra-ui/react";
 import { AwsServiceData } from "../../../helpers/aws/config";
 
+export interface DatecostProps {
+  costData: AwsServiceData[] | undefined;
+  refreshStates: {
+    refreshClicked: boolean;
+    setRefreshClicked: React.Dispatch<React.SetStateAction<boolean>>;
+  };
+
+  fromDateStates: {
+    fromDate: Date;
+    setFromDate: React.Dispatch<React.SetStateAction<Date>>;
+  };
+
+  toDateStates: {
+    toDate: Date;
+    setToDate: React.Dispatch<React.SetStateAction<Date>>;
+  };
+}
+
 export default function DateCost({
   costData,
-}: {
-  costData: AwsServiceData[] | undefined;
-}) {
+  refreshStates,
+  fromDateStates,
+  toDateStates,
+}: DatecostProps) {
   const [isMounted, setIsMounted] = useState<boolean>(false);
-  const [fromDate, setFromDate] = useState<Date>(new Date());
-  const [toDate, setToDate] = useState<Date>(new Date());
   const [totalCost, setTotalCost] = useState<number>(0);
+
+  const { fromDate, setFromDate } = fromDateStates;
+  const { toDate, setToDate } = toDateStates;
+
+  const { refreshClicked, setRefreshClicked } = refreshStates;
 
   const fromDateHandler = (fromDate: Date) => {
     setFromDate(fromDate);
@@ -65,6 +88,22 @@ export default function DateCost({
           value={toDate.toISOString().substring(0, 10)}
           onChange={(e) => toDateHandler(new Date(e.target.value))}
         />
+      </div>
+
+      <div className={styles.cost__date_container}>
+        {refreshClicked ? (
+          <Button variant={"solid"} colorScheme="pink" isLoading>
+            Refresh
+          </Button>
+        ) : (
+          <Button
+            variant={"solid"}
+            colorScheme="pink"
+            onClick={() => setRefreshClicked(true)}
+          >
+            Refresh
+          </Button>
+        )}
       </div>
 
       <div className={styles.cost__date_container}>

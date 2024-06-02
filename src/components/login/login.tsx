@@ -69,9 +69,12 @@ export default function Login(): JSX.Element {
 
                 setIsAuthenticating(true);
                 StoreCreds(secretKey, accessKey);
-                GetCostUsage().then(() => {
-                  setIsAuthenticating(false);
-                });
+                // GetCostUsage(
+                //   fromDate.toISOString().slice(0, 10),
+                //   toDate.toISOString().slice(0, 10)
+                // ).then(() => {
+                //   setIsAuthenticating(false);
+                // });
               }}
             >
               Login

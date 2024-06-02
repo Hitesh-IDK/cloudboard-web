@@ -1,6 +1,7 @@
 .cost__date_container {
   display: flex;
   flex-direction: column;
+  width: 80%;
 }
 
 .input__date {
@@ -8,7 +9,7 @@
   border: 1px solid #b87aa7;
   border-radius: 8px;
   padding: 5px 10px;
-  width: 80%;
+  /* width: 80%; */
 }
 
 .input__title {
