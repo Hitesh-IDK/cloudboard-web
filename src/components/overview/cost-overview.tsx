@@ -9,27 +9,29 @@ import { AwsServiceData } from "../../helpers/aws/config";
 import OverviewSubContainer from "../common/overview-subcontainer";
 import OverviewContainer from "../common/overview-container";
 
-export default function CostOverview(): JSX.Element {
-  const [isMounted, setIsMounted] = useState<boolean>(false);
-  const [costData, setCostData] = useState<AwsServiceData[]>();
+export interface CostOverviewProps {
+  costData: AwsServiceData[] | undefined;
+  refreshStates: {
+    refreshClicked: boolean;
+    setRefreshClicked: React.Dispatch<React.SetStateAction<boolean>>;
+  };
+  fromDateStates: {
+    fromDate: Date;
+    setFromDate: React.Dispatch<React.SetStateAction<Date>>;
+  };
+  toDateStates: {
+    toDate: Date;
+    setToDate: React.Dispatch<React.SetStateAction<Date>>;
+  };
+}
 
-  const [refreshClicked, setRefreshClicked] = useState<boolean>(true);
-  const [fromDate, setFromDate] = useState<Date>(new Date());
-  const [toDate, setToDate] = useState<Date>(new Date());
-
-  useEffect(() => {
-    setIsMounted(true);
-    if (!isMounted) return;
-
-    if (refreshClicked) {
-      GetCostUsage(fromDate, toDate).then((data) => {
-        setCostData(data);
-        console.log(data, fromDate, toDate);
-
-        setRefreshClicked(false);
-      });
-    }
-  }, [isMounted, refreshClicked]);
+export default function CostOverview(props: CostOverviewProps): JSX.Element {
+  const {
+    costData,
+    refreshStates: { refreshClicked, setRefreshClicked },
+    fromDateStates: { fromDate, setFromDate },
+    toDateStates: { toDate, setToDate },
+  } = props;
 
   return (
     <div>

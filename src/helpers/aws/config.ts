@@ -16,18 +16,9 @@ export interface AwsConfig {
   };
 }
 
-export interface AwsServiceCost {
+export interface AwsServiceCostUsage {
   unit: string;
   cost: number;
-  serviceName: string;
-  timeperiod: {
-    start: string;
-    end: string;
-  };
-}
-
-export interface AwsServiceUsage {
-  unit: string;
   usage: number;
   serviceName: string;
   timeperiod: {
@@ -41,4 +32,18 @@ export interface AwsServiceData {
   cost?: number;
   usage?: number;
   serviceName: string;
+}
+
+export interface AwsServiceUsage {
+  timeperiod: {
+    start: string;
+    end: string;
+  };
+  usage: number;
+  serviceName: string;
+}
+
+export interface AwsDataExtracted {
+  services: AwsServiceData[];
+  serviceUsage: AwsServiceUsage[];
 }

@@ -1,11 +1,19 @@
 import { GetCostAndUsageCommandOutput } from "@aws-sdk/client-cost-explorer";
-import { AwsServiceCost, AwsServiceData } from "./config";
+import {
+  AwsDataExtracted,
+  AwsServiceCostUsage,
+  AwsServiceData,
+  AwsServiceUsage,
+} from "./config";
 
-export default function ExtractCost(response: GetCostAndUsageCommandOutput) {
+export default function ExtractCostUsage(
+  response: GetCostAndUsageCommandOutput
+): AwsDataExtracted {
   const results = response.ResultsByTime;
 
   const services: AwsServiceData[] = [];
-  const serviceCost: AwsServiceCost[] = [];
+  const serviceCost: AwsServiceCostUsage[] = [];
+  const serviceUsage: AwsServiceUsage[] = [];
 
   results?.forEach((result) => {
     result.Groups?.forEach((group) => {
@@ -20,10 +28,12 @@ export default function ExtractCost(response: GetCostAndUsageCommandOutput) {
           return;
 
         const cost = Number(group.Metrics.UnblendedCost.Amount);
+        const usage = Number(group.Metrics.UsageQuantity.Amount);
 
         serviceCost.push({
           unit: group.Metrics.UnblendedCost.Unit || "N/A",
           cost: Number.isNaN(cost) ? 0 : cost,
+          usage: Number.isNaN(usage) ? 0 : usage,
           serviceName: key,
           timeperiod: {
             start: result.TimePeriod.Start,
@@ -37,12 +47,10 @@ export default function ExtractCost(response: GetCostAndUsageCommandOutput) {
           if (service.serviceName === key) {
             inserted = true;
             const tempServiceCost = service.cost ? service.cost : 0;
+            const tempServiceUsage = service.usage ? service.usage : 0;
             service.unit = group.Metrics?.UnblendedCost.Unit || "N/A";
-            service.cost = Number.isNaN(cost)
-              ? tempServiceCost
-                ? tempServiceCost
-                : 0
-              : tempServiceCost + cost;
+            service.usage = tempServiceUsage + usage;
+            service.cost = tempServiceCost + cost;
           }
         });
 
@@ -50,9 +58,21 @@ export default function ExtractCost(response: GetCostAndUsageCommandOutput) {
           services.push({
             unit: group.Metrics?.UnblendedCost.Unit || "N/A",
             cost: cost,
+            usage: usage,
             serviceName: key,
           });
         }
+
+        const tempServiceUsageItem: AwsServiceUsage = {
+          usage: usage,
+          serviceName: key,
+          timeperiod: {
+            start: result.TimePeriod.Start,
+            end: result.TimePeriod.End,
+          },
+        };
+
+        serviceUsage.push(tempServiceUsageItem);
       });
     });
   });
@@ -61,5 +81,6 @@ export default function ExtractCost(response: GetCostAndUsageCommandOutput) {
     return b.cost! - a.cost!;
   });
 
-  return services;
+  console.log(serviceUsage, services);
+  return { services, serviceUsage: serviceUsage };
 }

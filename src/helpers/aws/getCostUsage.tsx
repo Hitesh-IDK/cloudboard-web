@@ -4,9 +4,13 @@ import {
   GetCostAndUsageCommandInput,
 } from "@aws-sdk/client-cost-explorer";
 import config, { AwsConfig } from "./config";
-import ExtractCost from "./extractCost";
+import ExtractCostUsage from "./extractCost";
 
-export default async function GetCostUsage(start: Date, end: Date) {
+export default async function GetCostUsage(
+  start: Date,
+  end: Date
+  // type: "UnblendedCost" | "UsageQuantity"
+) {
   if (
     config.credentials.accessKeyId === undefined ||
     config.credentials.secretAccessKey === undefined
@@ -35,7 +39,7 @@ export default async function GetCostUsage(start: Date, end: Date) {
       End: endDate, // required
     },
     Granularity: "DAILY", // required
-    Metrics: ["UnblendedCost"],
+    Metrics: ["UnblendedCost", "UsageQuantity"],
     GroupBy: [
       {
         Type: "DIMENSION",
@@ -47,5 +51,7 @@ export default async function GetCostUsage(start: Date, end: Date) {
   const command = new GetCostAndUsageCommand(input);
 
   const response = await client.send(command);
-  return ExtractCost(response);
+  console.log(response);
+
+  return ExtractCostUsage(response);
 }
