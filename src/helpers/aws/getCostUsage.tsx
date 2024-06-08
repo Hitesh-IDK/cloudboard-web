@@ -31,8 +31,8 @@ export default async function GetCostUsage(start: Date, end: Date) {
   const input: GetCostAndUsageCommandInput = {
     TimePeriod: {
       // DateInterval
-      Start: "2024-04-10", // required
-      End: "2024-04-11", // required
+      Start: startDate, // required
+      End: endDate, // required
     },
     Granularity: "DAILY", // required
     Metrics: ["UnblendedCost"],
