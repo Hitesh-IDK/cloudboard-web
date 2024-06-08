@@ -1,0 +1,15 @@
+.cost__container {
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+}
+
+.cost__sub_container {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(128, 128, 128, 0.151);
+  border-radius: 8px;
+}

@@ -6,6 +6,8 @@ import DateCost from "./sections/date-cost";
 import ResourceList from "./sections/resource-list";
 import GetCostUsage from "../../helpers/aws/getCostUsage";
 import { AwsServiceData } from "../../helpers/aws/config";
+import OverviewSubContainer from "../common/overview-subcontainer";
+import OverviewContainer from "../common/overview-container";
 
 export default function CostOverview(): JSX.Element {
   const [isMounted, setIsMounted] = useState<boolean>(false);
@@ -34,19 +36,20 @@ export default function CostOverview(): JSX.Element {
       <SectionGap />
       <SectionTitle title="Cost Overview" />
 
-      <div className={styles.cost__container}>
-        <div className={styles.cost__sub_container}>
+      <OverviewContainer>
+        <OverviewSubContainer>
           <DateCost
             costData={costData}
             refreshStates={{ refreshClicked, setRefreshClicked }}
             fromDateStates={{ fromDate, setFromDate }}
             toDateStates={{ toDate, setToDate }}
           />
-        </div>
-        <div className={styles.cost__sub_container}>
+        </OverviewSubContainer>
+
+        <OverviewSubContainer>
           <ResourceList costData={costData} />
-        </div>
-      </div>
+        </OverviewSubContainer>
+      </OverviewContainer>
     </div>
   );
 }
