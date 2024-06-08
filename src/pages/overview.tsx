@@ -3,6 +3,7 @@ import OverViewHeader from "../components/overview/overview-header";
 import TagList from "../components/overview/tag-list";
 import styles from "./overview.module.css";
 import CostOverview from "../components/overview/cost-overview";
+import UsageOverview from "../components/overview/usage-overview";
 
 export default function Overview() {
   return (
@@ -15,6 +16,7 @@ export default function Overview() {
             <TagList />
             <Divider />
             <CostOverview />
+            <UsageOverview />
           </div>
         </div>
       </div>
